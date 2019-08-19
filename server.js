@@ -1,61 +1,29 @@
 'use strict';
 
-const Hapi = require('@hapi/hapi');
-var appCtrl = require('./appController.js');
+const express = require('express'),
+  app = express(),
+  bodyParser = require('body-parser'),
+  port = process.env.PORT || 3000;
 
-const init = async () => {
 
-    const server = Hapi.server({
-        port: 3000,
-        host: 'localhost'
-    });
+// const mysql = require('mysql');
+// // connection configurations
+// const mc = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'root',
+//     password: '',
+//     database: 'mydb'
+// });
+ 
+// // connect to database
+// mc.connect();
 
-    server.route({
-        method: 'GET',
-        path:'/prefs',
-        handler: (request, h) => {
-            console.log("prefs callig ...........")
-            
-            return appCtrl.list_all_prefs();
-        }
-    });
-    server.route({
-        method: 'GET',
-        path:'/',
-        handler: (request, h) => {
-            console.log("hello callig ...........")
-           console.log( appCtrl.hello());
-            return   "hello world";
-        }
-    });
+app.listen(port);
 
-    server.route({
-        method: 'GET',
-        path:'/prefs2',
-        handler: async (request, h) => {
-            console.log("prefs2 callig ...........")
+console.log('API server started on: ' + port);
 
-            const pref = await appCtrl.list_all_prefs2();
-            console.log("prefs2 pref ..........."+pref)
-            return pref;
-            //  appCtrl.list_all_prefs2().then((pre)=>{
-            //      console.log(pre)
-            //     return pre;}
-            //     ).catch((err) => {
-            //         console.log(err);
-            //         throw err;
-            //     });
-            
-        }
-    });
-    await server.start();
-    console.log('Server running on %s', server.info.uri);
-};
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-process.on('unhandledRejection', (err) => {
-
-    console.log(err);
-    process.exit(1);
-});
-
-init();
+var routes = require('./appRoutes'); //importing route
+routes(app); //register the route

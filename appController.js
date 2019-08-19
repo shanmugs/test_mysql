@@ -2,35 +2,44 @@
 
 var Prefs = require('./appModel.js');
 
-exports.list_all_prefs = function(req, h) {
+exports.list_all_prefs = function(req, res) {
+
     Prefs.getAllPrefs(function(err, task) {
     console.log('list_all_prefs controller')
     if (err)
-      throw err;
+      res.send(err);
 
     console.log('list_all_prefs res:: ', task);
-    return task
+      res.json(task);
   
-});
+  });
+    // Prefs.getAllPrefs().then((task)=>{ 
+    //   console.log('list_all_prefs res:: ', task);
+    //    return task;
+    // }).catch((err)=>{
+    //   console.log(err);
+    //   throw err;
+    // });
+
 };
 
-exports.hello = function(req, h) {
-  return   '{"message":"hello hapi-mysql!"}'
-};
+// exports.hello = function(req, h) {
+//   return   '{"message":"hello hapi-mysql!"}'
+// };
 
 
-exports.list_all_prefs2 = function(req, h) {
-  return  new Promise(function(resolve, reject){
-    Prefs.getAllPrefs(function() {
-          console.log('ilist_all_prefs2 controller')
-          if (err)
-          reject(err);
+// exports.list_all_prefs2 = function(req, h) {
+//   return  new Promise(function(resolve, reject){
+//     Prefs.getAllPrefs(function() {
+//           console.log('ilist_all_prefs2 controller')
+//           if (err)
+//           reject(err);
       
-          console.log('list_all_prefs2 res--> ', task);
-          resolve(task);
-      });
-   });
-};
+//           console.log('list_all_prefs2 res--> ', task);
+//           resolve(task);
+//       });
+//    });
+// };
 
 // exports.create_a_task = function(req, res) {
 //   var new_task = new Task(req.body);
