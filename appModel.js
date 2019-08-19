@@ -7,8 +7,7 @@ var sql = require('./db.js');
 var Prefs = function(prefs){
     this.name = prefs.name;
     this.value = prefs.value;
-    //this.created_at = new Date();
-};
+ };
 
  
 Prefs.getAllPrefs = function (result) {
@@ -17,8 +16,7 @@ Prefs.getAllPrefs = function (result) {
                 if(err) {
                     console.log("error: ", err);
                    result(null, err);
-                  // reject(err);
-                }
+                 }
                 else{
                   console.log('tasks : ', res);  
                   result(null, res);
