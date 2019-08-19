@@ -2,19 +2,36 @@
 
 var Prefs = require('./appModel.js');
 
-exports.list_all_prefs = function(req, res) {
+exports.list_all_prefs = function(req, h) {
     Prefs.getAllPrefs(function(err, task) {
-    console.log('controller')
+    console.log('list_all_prefs controller')
     if (err)
-      res.send(err);
+      throw err;
 
-    console.log('res', task);
-    res.send(task);
+    console.log('list_all_prefs res:: ', task);
+    return task
   
 });
 };
 
+exports.hello = function(req, h) {
+  return   '{"message":"hello hapi-mysql!"}'
+};
 
+
+exports.list_all_prefs2 = function(req, h) {
+  return  new Promise(function(resolve, reject){
+    Prefs.getAllPrefs(function(err, task) {
+      console.log('ilist_all_prefs2 controller')
+      if (err)
+      reject(err);
+  
+      console.log('list_all_prefs2 res--> ', task);
+      resolve(task);
+    
+  });
+ })
+};
 
 // exports.create_a_task = function(req, res) {
 //   var new_task = new Task(req.body);
