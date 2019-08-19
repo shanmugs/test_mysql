@@ -43,19 +43,23 @@ var Prefs = function(prefs){
 //             });   
 // };
 
-Prefs.getAllPrefs = function (result) {
-        sql.query("select name, value from preferences where owner_type='User' limit 10", function (err, res) {
+Prefs.getAllPrefs = function () {
 
+    return  new Promise(function(resolve, reject){
+        sql.query("select name, value from preferences where owner_type='User' limit 10", function (err, res) {
                 if(err) {
                     console.log("error: ", err);
-                    result(null, err);
+                   // result(null, err);
+                   reject(err);
                 }
                 else{
                   console.log('tasks : ', res);  
                  // sql.end();
-                 result(null, res);
+                 //result(null, res);
+                 resolve(res);
                 }
             });   
+        });   
 };
 // Task.updateById = function(id, task, result){
 //   sql.query("UPDATE tasks SET task = ? WHERE id = ?", [task.task, id], function (err, res) {

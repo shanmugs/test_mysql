@@ -21,16 +21,15 @@ exports.hello = function(req, h) {
 
 exports.list_all_prefs2 = function(req, h) {
   return  new Promise(function(resolve, reject){
-    Prefs.getAllPrefs(function(err, task) {
-      console.log('ilist_all_prefs2 controller')
-      if (err)
-      reject(err);
-  
-      console.log('list_all_prefs2 res--> ', task);
-      resolve(task);
-    
-  });
- })
+    Prefs.getAllPrefs(function() {
+          console.log('ilist_all_prefs2 controller')
+          if (err)
+          reject(err);
+      
+          console.log('list_all_prefs2 res--> ', task);
+          resolve(task);
+      });
+   });
 };
 
 // exports.create_a_task = function(req, res) {

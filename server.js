@@ -24,20 +24,27 @@ const init = async () => {
         path:'/',
         handler: (request, h) => {
             console.log("hello callig ...........")
-           console.log( appCtrl.hello())
-            return   "hello world"
+           console.log( appCtrl.hello());
+            return   "hello world";
         }
     });
 
     server.route({
         method: 'GET',
         path:'/prefs2',
-        handler: (request, h) => {
+        handler: async (request, h) => {
             console.log("prefs2 callig ...........")
-             appCtrl.list_all_prefs2().then((pre)=>{
-                 console.log(pre)
-                return pre;}
-                ).catch((err) => {console.log(err)});
+
+            const pref = await appCtrl.list_all_prefs2();
+            console.log("prefs2 pref ..........."+pref)
+            return pref;
+            //  appCtrl.list_all_prefs2().then((pre)=>{
+            //      console.log(pre)
+            //     return pre;}
+            //     ).catch((err) => {
+            //         console.log(err);
+            //         throw err;
+            //     });
             
         }
     });
