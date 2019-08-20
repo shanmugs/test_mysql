@@ -9,8 +9,8 @@
     "dev": "node_modules/.bin/nodemon ./server.js"
   },
   "engines": {
-    "node": ">= 8.5.0",
-    "npm": ">= 6.7.0"
+    "node": "8.16.0",
+    "npm": "6.7.0"
   },
   "author": "sathish <iamsathish@gmail.com>",
   "license": "MIT",
