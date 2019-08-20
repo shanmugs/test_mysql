@@ -1,7 +1,10 @@
 'use strict';
 
+const Boom = require('boom');
+
+
 const Hapi = require('@hapi/hapi');
-var appCtrl = require('./appController.js');
+const appCtrl = require('./appController.js');
 
 const init = async () => {
 
@@ -17,9 +20,9 @@ const init = async () => {
 
         try{
           console.log("prefs callig ...........")
-          const task = await  appCtrl.list_all_prefs()
+          const prefs = await appCtrl.list_all_prefs(request);
 
-          return task;
+          return prefs;
 
         }catch(err){
             console.log(err)

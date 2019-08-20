@@ -1,24 +1,36 @@
 'use strict';
 
-var Prefs = require('./appModel.js');
+const Prefs = require('./appModel.js');
 
-exports.list_all_prefs = function() {
-  return new Promise((resolve, reject) => {
-    Prefs.getAllPrefs(function(err, task) {
-      console.log('list_all_prefs controller')
-      if (err){
-        console.log(err)
-         reject(Boom.badImplementation());
-      }
+exports.list_all_prefs = async function (request) {
+  // return new Promise((resolve, reject) => {
+  //   Prefs.getAllPrefs(function(err, prefs) {
+  //     console.log('list_all_prefs controller')
+  //     if (err){
+  //       console.log(err)
+  //       return  reject(Boom.badImplementation());
+  //     }
+  //     console.log('list_all_prefs res:: ', prefs);
+  //     return resolve(prefs);
+  //   }); 
+  // });
 
-      console.log('list_all_prefs res:: ', task);
+  try {
+    console.log('list_all_prefs controller');
+
+    const prefs = await Prefs.getAllPrefs(request);
     
-      return resolve(task);
-    });
-   
+    console.log('list_all_prefs res:: ', prefs);
+    return prefs;
   
-  });
-    
+  } catch (error) {
+    console.log('list_all_prefs controller '+error);
+    console.log(error);
+    return Boom.badImplementation();
+  }
+
+
+
 };
 
 // exports.hello = function(req, h) {
@@ -32,7 +44,7 @@ exports.list_all_prefs = function() {
 //           console.log('ilist_all_prefs2 controller')
 //           if (err)
 //           reject(err);
-      
+
 //           console.log('list_all_prefs2 res--> ', task);
 //           resolve(task);
 //       });

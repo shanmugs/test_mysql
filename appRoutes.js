@@ -1,4 +1,5 @@
 'use strict';
+const Boom = require('boom');
 
 module.exports = function(app) {
   var appCtrl = require('./appController.js');
