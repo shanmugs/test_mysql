@@ -14,8 +14,6 @@ const fs = require("fs");
 // };
 // console.log(dbOptions);
 
-//{"host":"chimp-production.cluster-ro-cbju4qvufm6s.us-east-1.rds.amazonaws.com","port":3306,"database":"chimp_production","user":"chimp_reader"
-//,"password":"aqK1N0%0965C","ssl":{"rejectUnauthorized":false}}
 
 //local mysql db connection
 const connection = mysql.createConnection({
